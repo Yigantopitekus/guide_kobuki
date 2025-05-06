@@ -3,15 +3,18 @@
     <!-- ////////// -->
     <BehaviorTree ID="BehaviorTree">
         <ReactiveSequence>
-            <Action ID="Search" waypoint="{wp_}"/>
-            <Sequence>
-                <Action ID="NavObjective" goal="{wp_}"/>
-                <ReactiveFallback>
-                    <Action ID="StoreObject"/>
-                </ReactiveFallback>
+            <Fallback>
+                <Action ID="Search" waypoint="{wp_}"/>
+                <Action ID="ReadQR" waypoint="{wp_}"/>
+            <Fallback/>
+                <Sequence>
+                    <Action ID="NavObjective" goal="{wp_}"/>
+                    <ReactiveFallback>
+                        <Action ID="StoreObject"/>
+                    </ReactiveFallback>
+                    <Action ID="NavOdom"/>
+                </Sequence>
                 <Action ID="NavOdom"/>
-            </Sequence>
-            <Action ID="NavOdom"/>
         </ReactiveSequence>
     </BehaviorTree>
     <!-- ////////// -->
@@ -22,6 +25,8 @@
         <Action ID="Search"/>
             <output_port name="waypoint"/>
         <Action ID="StoreObject"/>
+        <Action ID="ReadQR"/>
+            <input_port name="goal"/>
     </TreeNodesModel>
     <!-- ////////// -->
 </root>

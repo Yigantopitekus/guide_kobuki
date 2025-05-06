@@ -18,9 +18,5 @@ guide_nav_main:
       w: 1.0
     arr: ["ciencia", "literatura", "historia", "infantil"]
     size: 4
-    id_literatura: 2
-    id_literatura: 3
-    id_literatura: 4
-    id_literatura: 5
 
 

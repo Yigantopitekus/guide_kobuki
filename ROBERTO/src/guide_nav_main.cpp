@@ -38,6 +38,7 @@ int main(int argc, char * argv[])
   factory.registerFromPlugin(loader.getOSName("navigate_to_objective"));
   factory.registerFromPlugin(loader.getOSName("navigate_to_odom"));
   factory.registerFromPlugin(loader.getOSName("store_object_node"));
+  factory.registerFromPlugin(loader.getOSName("readqr_node"));
 
   std::string pkgpath = ament_index_cpp::get_package_share_directory("guide_kobuki");
   std::string xml_file = pkgpath + "/bt_xml/library.xml";

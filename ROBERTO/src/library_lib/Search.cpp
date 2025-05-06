@@ -13,11 +13,7 @@
 namespace library_lib
 {
 
-Search::Search    node_->declare_parameter("arr", arr_);
-node_->declare_parameter("size", size_);
-
-node_->get_parameter("arr", arr_);
-node_->get_parameter("size", size_);
+Search::Search
 (
     const std::string & xml_tag_name,
     const BT::NodeConfiguration & conf)

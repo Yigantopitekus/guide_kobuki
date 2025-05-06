@@ -32,12 +32,14 @@ add_library(navigate_to_objective SHARED src/library_lib/NavObjective.cpp)
 add_library(search_node SHARED src/library_lib/Search.cpp)
 add_library(navigate_to_odom SHARED src/library_lib/NavOdom.cpp)
 add_library(store_object_node SHARED src/library_lib/StoreObject.cpp)
+add_library(readqr_node SHARED src/library_lib/ReadQR.cpp)
 
 list(APPEND plugin_libs
   navigate_to_objective
   search_node
   navigate_to_odom
   store_object_node
+  readqr_node
 )
 
 foreach(bt_plugin ${plugin_libs})
