@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Sequence>
+            <Action ID="ShowList" i="{i}" nombres="{ns}" waypoints="{wps}"/>
+            <KeepRunningUntilFailure>
+                <Inverter>
+                    <ReactiveSequence>
+                        <Fallback>
+                            <ForceFailure>
+                                <Condition ID="B1Pressed" i="{i}" nombres="{ns}" waypoint="{dest}" waypoints="{wps}"/>
+                            </ForceFailure>
+                            <ForceFailure>
+                                <Condition ID="B2Pressed" i="{i}" nombres="{ns}" waypoint="{dest}" waypoints="{wps}"/>
+                            </ForceFailure>
+                            <Condition ID="B0Pressed" waypoint="{dest}"/>
+                        </Fallback>
+                        <Inverter>
+                            <Sequence>
+                                <Action ID="GetWaypoint" waypoint="{dest}"/>
+                                <Action ID="Move" goal="{dest}"/>
+                            </Sequence>
+                        </Inverter>
+                    </ReactiveSequence>
+                </Inverter>
+            </KeepRunningUntilFailure>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Condition ID="B0Pressed">
+            <input_port default="0.0" name="waypoint"/>
+        </Condition>
+        <Condition ID="B1Pressed">
+            <inout_port name="i"/>
+            <input_port name="nombres"/>
+            <output_port name="waypoint"/>
+            <input_port name="waypoints"/>
+        </Condition>
+        <Condition ID="B2Pressed">
+            <inout_port name="i"/>
+            <input_port name="nombres"/>
+            <output_port name="waypoint"/>
+            <input_port name="waypoints"/>
+        </Condition>
+        <Action ID="GetWaypoint">
+            <output_port default="{wp}" name="waypoint"/>
+        </Action>
+        <Action ID="LastPlace"/>
+        <Action ID="Move">
+            <input_port default="wp" name="goal"/>
+        </Action>
+        <Action ID="NextPlace"/>
+        <Action ID="ShowList">
+            <output_port name="i"/>
+            <output_port name="nombres"/>
+            <output_port name="waypoints"/>
+        </Action>
+        <Action ID="nav2origin"/>
+        <Action ID="nav2wp"/>
+        <Action ID="photo"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>

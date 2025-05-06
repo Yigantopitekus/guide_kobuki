@@ -1,0 +1,26 @@
+guide_nav_main:
+  ros__parameters:
+    ciencia:
+      x: 1.4782130718231201
+      y: -7.332098484039307
+      w: 1.0
+    literatura:
+      x: 0.01
+      y: 0.01
+      w: 1.0
+    historia:
+      x: 0.01
+      y: 0.01
+      w: 1.0
+    infantil:
+      x: 0.01
+      y: 0.01
+      w: 1.0
+    arr: ["ciencia", "literatura", "historia", "infantil"]
+    size: 4
+    id_literatura: 2
+    id_literatura: 3
+    id_literatura: 4
+    id_literatura: 5
+
+

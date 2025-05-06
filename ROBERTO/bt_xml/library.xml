@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <ReactiveSequence>
+            <Action ID="Search" waypoint="{wp_}"/>
+            <Sequence>
+                <Action ID="NavObjective" goal="{wp_}"/>
+                <ReactiveFallback>
+                    <Action ID="StoreObject"/>
+                </ReactiveFallback>
+                <Action ID="NavOdom"/>
+            </Sequence>
+            <Action ID="NavOdom"/>
+        </ReactiveSequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="NavObjective"/>
+            <input_port name="goal"/>
+        <Action ID="NavOdom"/>
+        <Action ID="Search"/>
+            <output_port name="waypoint"/>
+        <Action ID="StoreObject"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
