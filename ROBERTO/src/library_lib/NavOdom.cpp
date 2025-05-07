@@ -1,19 +1,5 @@
-// Copyright 2019 Intelligent Robotics Lab
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 #include "library_lib/NavOdom.hpp"
-
+#include "behaviortree_cpp_v3/bt_factory.h"
 namespace library_lib
 {
 
@@ -23,32 +9,40 @@ NavOdom::NavOdom(
   const BT::NodeConfiguration & conf)
 : library_lib::BtActionNode<nav2_msgs::action::NavigateToPose>(xml_tag_name, action_name, conf)
 {
-   waypoint_pub_ = node_->create_publisher<geometry_msgs::msg::PoseStamped>("/goal_pose", 10);
+  // Ya no necesitas el publisher
 }
 
 void
 NavOdom::on_tick()
 {
-  geometry_msgs::msg::PoseStamped odom;
-  odom.header.frame_id = "map";
-  odom.pose.orientation.w = 0;
-  odom.pose.position.x = -0.030662624165415764;
-  odom.pose.position.y = 0.08279210329055786;
+  RCLCPP_INFO(node_->get_logger(), "**ENTRO A ODOM**");
 
-  waypoint_pub_->publish(odom);
+  // Establecer el goal que será enviado al action server
+  geometry_msgs::msg::PoseStamped target_pose;
+  target_pose.header.frame_id = "map";
+  target_pose.header.stamp = node_->now();
 
+  target_pose.pose.position.x = -0.030662624165415764;
+  target_pose.pose.position.y = 0.08279210329055786;
+
+  // Orientación válida (neutra)
+  target_pose.pose.orientation.x = 0.0;
+  target_pose.pose.orientation.y = 0.0;
+  target_pose.pose.orientation.z = 0.0;
+  target_pose.pose.orientation.w = 1.0;
+
+  goal_.pose = target_pose;
 }
 
 BT::NodeStatus
 NavOdom::on_success()
 {
   RCLCPP_INFO(node_->get_logger(), "** NAVIGATION SUCCEEDED **");
-
   return BT::NodeStatus::SUCCESS;
 }
 
+}  // namespace library_lib
 
-}
 
 BT_REGISTER_NODES(factory)
 {
@@ -59,6 +53,5 @@ BT_REGISTER_NODES(factory)
         name, "navigate_to_odom", config);
     };
 
-  factory.registerBuilder<library_lib::NavOdom>(
-    "NavOdom", builder);
+  factory.registerBuilder<library_lib::NavOdom>("NavOdom", builder);
 }

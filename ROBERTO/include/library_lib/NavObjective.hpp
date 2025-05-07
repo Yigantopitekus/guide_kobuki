@@ -28,13 +28,10 @@ public:
 
   BT::NodeStatus on_success() override;
   void on_tick() override;
-
+  void on_wait_for_result();
   static BT::PortsList providedPorts()
   {
-    return BT::PortsList(
-      {
-        BT::InputPort<geometry_msgs::msg::PoseStamped>("waypoint")});
-  }
+    return BT::PortsList();}
 
 private:
 

@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #include "library_lib/NavObjective.hpp"
-
+#include "behaviortree_cpp_v3/bt_factory.h"
 namespace library_lib
 {
 
@@ -30,18 +30,12 @@ void
 NavObjective::on_tick()
 {
   geometry_msgs::msg::PoseStamped goal;
-  getInput("waypoint", goal);
+  config().blackboard->get("waypoint", goal);
+  goal_.pose = goal;
 
-  RCLCPP_INFO(node_->get_logger(), "Going to: (%.2f, %.2f) [%s]",
-            goal.pose.position.x,
-            goal.pose.position.y,
-            goal.header.frame_id.c_str());
+  goal_.pose.header = goal.header;
+  goal_.pose.header.stamp = node_->get_clock()->now();
 
-
-  waypoint_pub_->publish(goal);
-
-
-  std::cout << "navegando" << std::endl;
 
 
 }
@@ -54,6 +48,11 @@ NavObjective::on_success()
   return BT::NodeStatus::SUCCESS;
 }
 
+void
+NavObjective::on_wait_for_result()
+{
+  RCLCPP_INFO(node_->get_logger(), "** AAAAAAAAAAAAAAAAAAA**");
+}
 
 }
 

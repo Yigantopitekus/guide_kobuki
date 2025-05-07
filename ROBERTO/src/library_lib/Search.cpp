@@ -139,7 +139,7 @@ Search::tick()
             wp_.pose.position.x = x;
             wp_.pose.position.y = y;
             
-            setOutput("waypoint", wp_);
+            config().blackboard->set("waypoint", wp_);
             idx_ = 0;
             return BT::NodeStatus::SUCCESS;
       }

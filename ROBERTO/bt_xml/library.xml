@@ -2,33 +2,22 @@
 <root main_tree_to_execute="BehaviorTree">
     <!-- ////////// -->
     <BehaviorTree ID="BehaviorTree">
-        <ReactiveSequence>
+        <Sequence>
             <Fallback>
-                <Action ID="Search" waypoint="{wp}"/>
-                <Action ID="ReadQR" waypoint="{wp]"/>
+                <Action ID="Search"/>
+                <Action ID="ReadQR"/>
             </Fallback>
-            <Inverter>
-                <Sequence>
-                    <Action ID="NavObjective" waypoint="{wp}"/>
-                    <Action ID="StoreObject"/>
-                    <Action ID="NavOdom"/>
-                </Sequence>
-            </Inverter>
-        </ReactiveSequence>
+            <Action ID="NavObjective"/>
+            <Action ID="NavOdom"/>
+        </Sequence>
     </BehaviorTree>
     <!-- ////////// -->
     <TreeNodesModel>
         <Undefined ID=""/>
-        <Action ID="NavObjective">
-            <input_port name="waypoint"/>
-        </Action>
+        <Action ID="NavObjective"/>
         <Action ID="NavOdom"/>
-        <Action ID="ReadQR">
-            <output_port name="waypoint"/>
-        </Action>
-        <Action ID="Search">
-            <output_port name="waypoint"/>
-        </Action>
+        <Action ID="ReadQR"/>
+        <Action ID="Search"/>
         <Action ID="StoreObject"/>
     </TreeNodesModel>
     <!-- ////////// -->
