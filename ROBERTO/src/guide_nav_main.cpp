@@ -46,12 +46,6 @@ int main(int argc, char * argv[])
   auto blackboard = BT::Blackboard::create();
   blackboard->set("node", node);
 
-  geometry_msgs::msg::PoseStamped odom;
-  odom.pose.orientation.w = -1.57;
-  odom.pose.position.x = 3.2484867572784424;
-  odom.pose.position.y = -2.5725605487823486;
-  blackboard->set("odom", odom);
-
   BT::Tree tree = factory.createTreeFromFile(xml_file, blackboard);
 
   rclcpp::Rate rate(10);

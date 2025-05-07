@@ -7,13 +7,13 @@
                 <Action ID="Search" waypoint="{wp}"/>
                 <Action ID="ReadQR" waypoint="{wp]"/>
             </Fallback>
-            <Sequence>
-                <Action ID="NavObjective" waypoint="{wp}"/>
-                <ReactiveFallback>
+            <Inverter>
+                <Sequence>
+                    <Action ID="NavObjective" waypoint="{wp}"/>
                     <Action ID="StoreObject"/>
-                </ReactiveFallback>
-            </Sequence>
-            <Action ID="NavOdom" odom=""/>
+                    <Action ID="NavOdom"/>
+                </Sequence>
+            </Inverter>
         </ReactiveSequence>
     </BehaviorTree>
     <!-- ////////// -->
@@ -22,9 +22,7 @@
         <Action ID="NavObjective">
             <input_port name="waypoint"/>
         </Action>
-        <Action ID="NavOdom">
-            <input_port name="odom"/>
-        </Action>
+        <Action ID="NavOdom"/>
         <Action ID="ReadQR">
             <output_port name="waypoint"/>
         </Action>

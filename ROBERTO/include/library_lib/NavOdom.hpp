@@ -31,10 +31,10 @@ public:
 
   static BT::PortsList providedPorts()
   {
-    return BT::PortsList(
-      {
-        BT::InputPort<geometry_msgs::msg::PoseStamped>("odom")});
+    return BT::PortsList();
   }
+
+  rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr waypoint_pub_;
 
 };
 

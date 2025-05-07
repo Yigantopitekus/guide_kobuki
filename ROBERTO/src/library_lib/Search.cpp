@@ -54,7 +54,7 @@ Search::Search
 }
 void Search::print_interface()
 {
-    system("clear");
+    //system("clear");
     std::cout << "========= MENU DE DESTINOS =========" << std::endl;
     for (size_t i = 0; i < arr_.size(); ++i)
     {

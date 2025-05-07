@@ -23,15 +23,19 @@ NavOdom::NavOdom(
   const BT::NodeConfiguration & conf)
 : library_lib::BtActionNode<nav2_msgs::action::NavigateToPose>(xml_tag_name, action_name, conf)
 {
+   waypoint_pub_ = node_->create_publisher<geometry_msgs::msg::PoseStamped>("/goal_pose", 10);
 }
 
 void
 NavOdom::on_tick()
 {
   geometry_msgs::msg::PoseStamped odom;
-  getInput("odom", odom);
+  odom.header.frame_id = "map";
+  odom.pose.orientation.w = 0;
+  odom.pose.position.x = -0.030662624165415764;
+  odom.pose.position.y = 0.08279210329055786;
 
-  goal_.pose = odom;
+  waypoint_pub_->publish(odom);
 
 }
 

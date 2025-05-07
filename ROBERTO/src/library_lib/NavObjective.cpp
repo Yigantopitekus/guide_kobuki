@@ -23,6 +23,7 @@ NavObjective::NavObjective(
   const BT::NodeConfiguration & conf)
 : library_lib::BtActionNode<nav2_msgs::action::NavigateToPose>(xml_tag_name, action_name, conf)
 {
+   waypoint_pub_ = node_->create_publisher<geometry_msgs::msg::PoseStamped>("/goal_pose", 10);
 }
 
 void
@@ -31,7 +32,14 @@ NavObjective::on_tick()
   geometry_msgs::msg::PoseStamped goal;
   getInput("waypoint", goal);
 
-  goal_.pose = goal;
+  RCLCPP_INFO(node_->get_logger(), "Going to: (%.2f, %.2f) [%s]",
+            goal.pose.position.x,
+            goal.pose.position.y,
+            goal.header.frame_id.c_str());
+
+
+  waypoint_pub_->publish(goal);
+
 
   std::cout << "navegando" << std::endl;
 
