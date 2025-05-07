@@ -4,29 +4,34 @@
     <BehaviorTree ID="BehaviorTree">
         <ReactiveSequence>
             <Fallback>
-                <Action ID="Search" waypoint="{wp_}"/>
-                <Action ID="ReadQR" waypoint="{wp_}"/>
-            <Fallback/>
-                <Sequence>
-                    <Action ID="NavObjective" goal="{wp_}"/>
-                    <ReactiveFallback>
-                        <Action ID="StoreObject"/>
-                    </ReactiveFallback>
-                    <Action ID="NavOdom"/>
-                </Sequence>
-                <Action ID="NavOdom"/>
+                <Action ID="Search" waypoint="{wp}"/>
+                <Action ID="ReadQR" waypoint="{wp]"/>
+            </Fallback>
+            <Sequence>
+                <Action ID="NavObjective" waypoint="{wp}"/>
+                <ReactiveFallback>
+                    <Action ID="StoreObject"/>
+                </ReactiveFallback>
+            </Sequence>
+            <Action ID="NavOdom" odom=""/>
         </ReactiveSequence>
     </BehaviorTree>
     <!-- ////////// -->
     <TreeNodesModel>
-        <Action ID="NavObjective"/>
-            <input_port name="goal"/>
-        <Action ID="NavOdom"/>
-        <Action ID="Search"/>
+        <Undefined ID=""/>
+        <Action ID="NavObjective">
+            <input_port name="waypoint"/>
+        </Action>
+        <Action ID="NavOdom">
+            <input_port name="odom"/>
+        </Action>
+        <Action ID="ReadQR">
             <output_port name="waypoint"/>
+        </Action>
+        <Action ID="Search">
+            <output_port name="waypoint"/>
+        </Action>
         <Action ID="StoreObject"/>
-        <Action ID="ReadQR"/>
-            <input_port name="goal"/>
     </TreeNodesModel>
     <!-- ////////// -->
 </root>

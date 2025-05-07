@@ -29,9 +29,13 @@ void
 NavObjective::on_tick()
 {
   geometry_msgs::msg::PoseStamped goal;
-  getInput("goal", goal);
+  getInput("waypoint", goal);
 
   goal_.pose = goal;
+
+  std::cout << "navegando" << std::endl;
+
+
 }
 
 BT::NodeStatus

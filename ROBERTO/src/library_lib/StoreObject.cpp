@@ -33,6 +33,7 @@ void library_lib::StoreObject::halt()
 BT::NodeStatus
 StoreObject::tick()
 {
+    std::cout << "libro dejado en su sitio" << std::endl;
     return BT::NodeStatus::SUCCESS;
 }
 }
