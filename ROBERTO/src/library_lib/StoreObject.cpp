@@ -13,9 +13,6 @@ StoreObject::StoreObject(const std::string &xml_tag_name, const BT::NodeConfigur
     );
 }
 
-BT::PortsList StoreObject::providedPorts() {
-    return {BT::InputPort<bool>("destination_reached")};
-}
 
 void StoreObject::halt() {
     RCLCPP_INFO(node_->get_logger(), "StoreObject halted");
@@ -24,13 +21,9 @@ void StoreObject::halt() {
 BT::NodeStatus StoreObject::tick() {
     RCLCPP_INFO(node_->get_logger(), "StoreObject ejecutándose...");
 
-    bool destination_reached = false;
-    if (!getInput<bool>("destination_reached", destination_reached)) {
-        RCLCPP_ERROR(node_->get_logger(), "Fallo al obtener el parámetro 'destination_reached'");
-        return BT::NodeStatus::FAILURE;
-    }
 
-    if (destination_reached && !image_saved_) {
+
+    if (!image_saved_) {
         RCLCPP_INFO(node_->get_logger(), "Destino alcanzado. Preparando captura de imagen...");
         return BT::NodeStatus::RUNNING;
     }

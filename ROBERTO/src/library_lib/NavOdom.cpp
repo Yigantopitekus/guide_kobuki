@@ -17,18 +17,16 @@ NavOdom::on_tick()
   RCLCPP_INFO(node_->get_logger(), "**ENTRO A ODOM**");
 
   geometry_msgs::msg::PoseStamped target_pose;
-  wp.pose.position.x = 0.0;
-  wp.pose.position.y = 0.0;
-  wp.pose.orientation.w = 0.0;
+
 
   target_pose.header.frame_id = "map";
   target_pose.header.stamp = node_->now();
 
   target_pose.pose.position.x = 0;
   target_pose.pose.position.y = 0;
+  target_pose.pose.orientation.w = 0;
 
   goal_.pose = target_pose;
-  config().blackboard->set("waypoint",wp);
 
 }
 

@@ -17,11 +17,16 @@ class StoreObject : public BT::ActionNodeBase {
 public:
     explicit StoreObject(const std::string &xml_tag_name, const BT::NodeConfiguration &conf);
 
-    static BT::PortsList providedPorts();
 
     void halt() override;
 
     BT::NodeStatus tick() override;
+    static BT::PortsList providedPorts()
+    {
+      return BT::PortsList(
+        {
+        });
+    }
 
 private:
     rclcpp::Node::SharedPtr node_;

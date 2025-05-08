@@ -13,6 +13,9 @@ find_package(rclcpp_action REQUIRED)
 find_package(kobuki_ros_interfaces REQUIRED)
 find_package(nav2_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(cv_bridge REQUIRED)
+find_package(OpenCV REQUIRED)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -24,7 +27,13 @@ set(dependencies
     rclcpp_action
     kobuki_ros_interfaces
     geometry_msgs
+    sensor_msgs
+    cv_bridge
+    OpenCV
 )
+#include "sensor_msgs/msg/image.hpp"
+#include "cv_bridge/cv_bridge.hpp"
+#include "opencv2/opencv.hpp"
 
 include_directories(include ${ZMQ_INCLUDE_DIRS})
 
