@@ -32,7 +32,7 @@ public:
   }
 
 private:
-  void object_callback(std_msgs::msg::Float32MultiArray::UniquePtr msg);
+  void object_callback(std_msgs::msg::Float32MultiArray::SharedPtr msg);
 
   geometry_msgs::msg::PoseStamped wp_;
   rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr object_sub_;
@@ -54,10 +54,10 @@ private:
   double historiaw_;
 
   int id_;
-
+  bool turn_;
   rclcpp::Node::SharedPtr node_;
 
-  std_msgs::msg::Float32MultiArray::UniquePtr last_object_;
+  std_msgs::msg::Float32MultiArray last_object_;
 };
 
 }

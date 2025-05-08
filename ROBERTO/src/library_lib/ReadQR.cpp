@@ -16,20 +16,25 @@ ReadQR::ReadQR(
     : BT::ActionNodeBase(xml_tag_name, conf)
 {
 
-
-    config().blackboard->get("node", node_);
-
+  config().blackboard->get("node", node_);
     object_sub_ = node_->create_subscription<std_msgs::msg::Float32MultiArray>(
      "/objects", 10, std::bind(&ReadQR::object_callback,this, std::placeholders::_1));
-    last_object_ = NULL;
+    turn_ = false;
+
+
+
 }
 
 
 void
-ReadQR::object_callback(std_msgs::msg::Float32MultiArray::UniquePtr msg)
+ReadQR::object_callback(std_msgs::msg::Float32MultiArray::SharedPtr msg)
 {
-  last_object_ = std::move(msg);
-  id_ = msg->data[0];
+
+  if(msg != nullptr && !msg->data.empty() && turn_ == true )
+  {
+    last_object_ = *msg;
+    id_ = msg->data[0];
+  }
 }
 void library_lib::ReadQR::halt()
 {
@@ -38,11 +43,18 @@ void library_lib::ReadQR::halt()
 BT::NodeStatus
 ReadQR::tick()
 {
-  double x,y,w;
+  turn_ = true;
+  double x = 0.0;
+  double y = 0.0;
+  double w = 1.0;
+
+  if(last_object_.data.empty())
+  {  
+    return BT::NodeStatus::RUNNING;
+  }
   switch(id_)
   {
     case id_literatura_:
-
       wp_.header.frame_id = "map";
       wp_.pose.orientation.w = w;
       wp_.pose.position.x = x;

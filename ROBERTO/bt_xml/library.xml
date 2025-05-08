@@ -2,14 +2,16 @@
 <root main_tree_to_execute="BehaviorTree">
     <!-- ////////// -->
     <BehaviorTree ID="BehaviorTree">
-        <Sequence>
-            <Fallback>
-                <Action ID="Search"/>
-                <Action ID="ReadQR"/>
-            </Fallback>
-            <Action ID="NavObjective"/>
-            <Action ID="NavOdom"/>
-        </Sequence>
+        <KeepRunningUntilFailure>
+            <Sequence>
+                <Fallback>
+                    <Action ID="Search"/>
+                    <Action ID="ReadQR"/>
+                </Fallback>
+                <Action ID="NavObjective"/>
+                <Action ID="NavOdom"/>
+            </Sequence>
+        </KeepRunningUntilFailure>
     </BehaviorTree>
     <!-- ////////// -->
     <TreeNodesModel>

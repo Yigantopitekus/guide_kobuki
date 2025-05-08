@@ -23,7 +23,6 @@ NavObjective::NavObjective(
   const BT::NodeConfiguration & conf)
 : library_lib::BtActionNode<nav2_msgs::action::NavigateToPose>(xml_tag_name, action_name, conf)
 {
-   waypoint_pub_ = node_->create_publisher<geometry_msgs::msg::PoseStamped>("/goal_pose", 10);
 }
 
 void
@@ -52,7 +51,6 @@ NavObjective::on_success()
 void
 NavObjective::on_wait_for_result()
 {
-  RCLCPP_INFO(node_->get_logger(), "** AAAAAAAAAAAAAAAAAAA**");
 }
 
 }

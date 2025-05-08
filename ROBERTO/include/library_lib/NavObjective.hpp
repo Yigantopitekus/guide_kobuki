@@ -35,7 +35,6 @@ public:
 
 private:
 
-rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr waypoint_pub_;
 
   geometry_msgs::msg::PoseStamped wp_;
 };

@@ -9,7 +9,6 @@ NavOdom::NavOdom(
   const BT::NodeConfiguration & conf)
 : library_lib::BtActionNode<nav2_msgs::action::NavigateToPose>(xml_tag_name, action_name, conf)
 {
-  // Ya no necesitas el publisher
 }
 
 void
@@ -17,19 +16,17 @@ NavOdom::on_tick()
 {
   RCLCPP_INFO(node_->get_logger(), "**ENTRO A ODOM**");
 
-  // Establecer el goal que será enviado al action server
   geometry_msgs::msg::PoseStamped target_pose;
   target_pose.header.frame_id = "map";
   target_pose.header.stamp = node_->now();
 
-  target_pose.pose.position.x = -0.030662624165415764;
-  target_pose.pose.position.y = 0.08279210329055786;
+  target_pose.pose.position.x = 0;
+  target_pose.pose.position.y = 0;
 
-  // Orientación válida (neutra)
   target_pose.pose.orientation.x = 0.0;
   target_pose.pose.orientation.y = 0.0;
   target_pose.pose.orientation.z = 0.0;
-  target_pose.pose.orientation.w = 1.0;
+  target_pose.pose.orientation.w = -3.14;
 
   goal_.pose = target_pose;
 }
@@ -41,7 +38,7 @@ NavOdom::on_success()
   return BT::NodeStatus::SUCCESS;
 }
 
-}  // namespace library_lib
+}  
 
 
 BT_REGISTER_NODES(factory)
