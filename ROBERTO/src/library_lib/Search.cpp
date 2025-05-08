@@ -79,8 +79,9 @@ void
 Search::button_callback(kobuki_ros_interfaces::msg::ButtonEvent::UniquePtr msg)
 {
   Search::print_interface();
-
-  last_button_ = std::move(msg);
+  if(msg->state == kobuki_ros_interfaces::msg::ButtonEvent::PRESSED)
+    {last_button_ = std::move(msg);
+    }
 }
 void library_lib::Search::halt()
 {
@@ -89,6 +90,10 @@ void library_lib::Search::halt()
 BT::NodeStatus
 Search::tick()
 {
+  double x = 0.0;
+  double y = 0.0;
+  double w = 1.0;
+  
   if(last_button_ == NULL)
   {
       return BT::NodeStatus::RUNNING;
@@ -126,9 +131,6 @@ Search::tick()
             }
             idx_ = 0;
 
-
-            double x, y, w;
-
             node_->get_parameter(name + ".x", x);
             node_->get_parameter(name + ".y", y);
             node_->get_parameter(name + ".w", w);
@@ -139,9 +141,9 @@ Search::tick()
             wp_.pose.position.y = y;
             
             config().blackboard->set("waypoint", wp_);
-            idx_ = 0;
             return BT::NodeStatus::SUCCESS;
       }
+  last_button_ = NULL;
   return BT::NodeStatus::RUNNING;
 
 }

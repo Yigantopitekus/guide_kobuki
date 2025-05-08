@@ -17,9 +17,25 @@ ReadQR::ReadQR(
 {
 
   config().blackboard->get("node", node_);
-    object_sub_ = node_->create_subscription<std_msgs::msg::Float32MultiArray>(
-     "/objects", 10, std::bind(&ReadQR::object_callback,this, std::placeholders::_1));
-    turn_ = false;
+  node_->get_parameter("ciencia.x", cienciax_);
+  node_->get_parameter("ciencia.y", cienciay_);
+  node_->get_parameter("ciencia.w", cienciaw_);
+
+  node_->get_parameter("literatura.x", literaturax_);
+  node_->get_parameter("literatura.y", literaturay_);
+  node_->get_parameter("literatura.w", literaturaw_);
+
+  node_->get_parameter("infantil.x", infantilx_);
+  node_->get_parameter("infantil.y", infantily_);
+  node_->get_parameter("infantil.w", infantilw_);
+
+  node_->get_parameter("historia.x", historiax_);
+  node_->get_parameter("historia.y", historiay_);
+  node_->get_parameter("historia.w", historiaw_);
+
+  object_sub_ = node_->create_subscription<std_msgs::msg::Float32MultiArray>(
+    "/objects", 10, std::bind(&ReadQR::object_callback,this, std::placeholders::_1));
+  turn_ = false;
 
 
 
@@ -30,7 +46,7 @@ void
 ReadQR::object_callback(std_msgs::msg::Float32MultiArray::SharedPtr msg)
 {
 
-  if(msg != nullptr && !msg->data.empty() && turn_ == true )
+  if(msg != nullptr && !msg->data.empty())
   {
     last_object_ = *msg;
     id_ = msg->data[0];
@@ -43,10 +59,6 @@ void library_lib::ReadQR::halt()
 BT::NodeStatus
 ReadQR::tick()
 {
-  turn_ = true;
-  double x = 0.0;
-  double y = 0.0;
-  double w = 1.0;
 
   if(last_object_.data.empty())
   {  
@@ -56,41 +68,41 @@ ReadQR::tick()
   {
     case id_literatura_:
       wp_.header.frame_id = "map";
-      wp_.pose.orientation.w = w;
-      wp_.pose.position.x = x;
-      wp_.pose.position.y = y;
+      wp_.pose.orientation.w = literaturaw_;
+      wp_.pose.position.x = literaturax_;
+      wp_.pose.position.y = literaturay_;
 
-      config().blackboard->set("qr", wp_);
+      config().blackboard->set("waypoint", wp_);
 
       return BT::NodeStatus::SUCCESS;
     case id_historia_:
 
       wp_.header.frame_id = "map";
-      wp_.pose.orientation.w = w;
-      wp_.pose.position.x = x;
-      wp_.pose.position.y = y;
+      wp_.pose.orientation.w = historiaw_;
+      wp_.pose.position.x = historiax_;
+      wp_.pose.position.y = historiay_;
 
-      config().blackboard->set("qr", wp_);
+      config().blackboard->set("waypoint", wp_);
 
       return BT::NodeStatus::SUCCESS;
     case id_infantil_:
 
       wp_.header.frame_id = "map";
-      wp_.pose.orientation.w = w;
-      wp_.pose.position.x = x;
-      wp_.pose.position.y = y;
+      wp_.pose.orientation.w = infantilw_;
+      wp_.pose.position.x = infantilx_;
+      wp_.pose.position.y = infantily_;
 
-      config().blackboard->set("qr", wp_);
+      config().blackboard->set("waypoint", wp_);
 
       return BT::NodeStatus::SUCCESS;
     case id_ciencia_:
 
       wp_.header.frame_id = "map";
-      wp_.pose.orientation.w = w;
-      wp_.pose.position.x = x;
-      wp_.pose.position.y = y;
+      wp_.pose.orientation.w = cienciaw_;
+      wp_.pose.position.x = cienciax_;
+      wp_.pose.position.y =  cienciay_;
 
-      config().blackboard->set("qr", wp_);
+      config().blackboard->set("waypoint", wp_);
       return BT::NodeStatus::SUCCESS;
   }
 

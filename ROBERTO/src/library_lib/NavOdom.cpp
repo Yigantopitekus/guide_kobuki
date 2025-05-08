@@ -17,6 +17,11 @@ NavOdom::on_tick()
   RCLCPP_INFO(node_->get_logger(), "**ENTRO A ODOM**");
 
   geometry_msgs::msg::PoseStamped target_pose;
+  geometry_msgs::msg::PoseStamped wp;
+  wp.pose.position.x = 0.0;
+  wp.pose.position.y = 0.0;
+  wp.pose.orientation.w = 0.0;
+
   target_pose.header.frame_id = "map";
   target_pose.header.stamp = node_->now();
 
@@ -29,6 +34,8 @@ NavOdom::on_tick()
   target_pose.pose.orientation.w = -3.14;
 
   goal_.pose = target_pose;
+  config().blackboard->set("waypoint",wp);
+
 }
 
 BT::NodeStatus
