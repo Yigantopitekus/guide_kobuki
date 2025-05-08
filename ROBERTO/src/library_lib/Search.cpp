@@ -54,7 +54,7 @@ Search::Search
 }
 void Search::print_interface()
 {
-    //system("clear");
+    system("clear");
     std::cout << "========= MENU DE DESTINOS =========" << std::endl;
     for (size_t i = 0; i < arr_.size(); ++i)
     {
@@ -108,19 +108,18 @@ Search::tick()
           case 1:
             if(last_button_->state == kobuki_ros_interfaces::msg::ButtonEvent::PRESSED)
               {
-                if(idx_ < 1)
-                {
-                  idx_ = size_ - 1;
-                  break;
-                }
                 idx_--;
+                if(idx_ < 0)
+                {
+                  idx_ = size_-1;
+                }
 
               }
             break;
           case 2:
             last_button_ = NULL;
             std::string name = arr_[idx_];
-            if(idx_ > 4)
+            if(idx_ == 4)
             {
               idx_ = 0;
               return BT::NodeStatus::FAILURE;

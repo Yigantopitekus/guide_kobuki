@@ -48,7 +48,7 @@ ReadQR::tick()
       wp_.pose.position.x = x;
       wp_.pose.position.y = y;
 
-      setOutput("waypoint", wp_);
+      config().blackboard->set("qr", wp_);
 
       return BT::NodeStatus::SUCCESS;
     case id_historia_:
@@ -58,7 +58,7 @@ ReadQR::tick()
       wp_.pose.position.x = x;
       wp_.pose.position.y = y;
 
-      setOutput("waypoint", wp_);
+      config().blackboard->set("qr", wp_);
 
       return BT::NodeStatus::SUCCESS;
     case id_infantil_:
@@ -68,7 +68,7 @@ ReadQR::tick()
       wp_.pose.position.x = x;
       wp_.pose.position.y = y;
 
-      setOutput("waypoint", wp_);
+      config().blackboard->set("qr", wp_);
 
       return BT::NodeStatus::SUCCESS;
     case id_ciencia_:
@@ -78,7 +78,7 @@ ReadQR::tick()
       wp_.pose.position.x = x;
       wp_.pose.position.y = y;
 
-      setOutput("waypoint", wp_);
+      config().blackboard->set("qr", wp_);
       return BT::NodeStatus::SUCCESS;
   }
 

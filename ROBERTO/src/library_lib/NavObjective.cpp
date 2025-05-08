@@ -30,13 +30,14 @@ void
 NavObjective::on_tick()
 {
   geometry_msgs::msg::PoseStamped goal;
+  geometry_msgs::msg::PoseStamped goal_qr;
   config().blackboard->get("waypoint", goal);
+  config().blackboard->get("qr", goal);
+
   goal_.pose = goal;
 
   goal_.pose.header = goal.header;
   goal_.pose.header.stamp = node_->get_clock()->now();
-
-
 
 }
 
