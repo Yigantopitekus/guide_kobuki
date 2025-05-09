@@ -28,6 +28,14 @@ git clone https://github.com/introlab/find-object.git src/find_object_2d
 #### **Elementos de procesamiento de imagenes**
 Instalación de `cv_brigde` y de OpenCV
 ```bash
+cd ~/asr_ws/src
+git clone https://github.com/ros-perception/vision_opencv.git -b humble
+cd ~/asr_ws
+rosdep install --from-paths src --ignore-src -r -y
+colcon build --packages-slect cv_bridge
+source install/setup.bash
+ros2 pkg list | grep cv_bridge
+
 ```
 
 #### **Comandos de lanzamiento del proyecto**
@@ -129,6 +137,7 @@ Este Behaviour Tree garantiza que el robot continúe intentando sus objetivos mi
     <BehaviorTree ID="BehaviorTree">
         <KeepRunningUntilFailure>
             <Sequence>
+                <Action ID="ReadFace"/>
                 <Fallback>
                     <Action ID="Search"/>
                     <Action ID="ReadQR"/>
@@ -146,6 +155,7 @@ Este Behaviour Tree garantiza que el robot continúe intentando sus objetivos mi
         <Action ID="ReadQR"/>
         <Action ID="Search"/>
         <Action ID="StoreObject"/>
+        <Action ID="ReadFace"/>
     </TreeNodesModel>
     <!-- ////////// -->
 </root>
