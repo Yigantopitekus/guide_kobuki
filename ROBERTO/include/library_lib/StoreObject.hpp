@@ -17,10 +17,13 @@ class StoreObject : public BT::ActionNodeBase {
 public:
     explicit StoreObject(const std::string &xml_tag_name, const BT::NodeConfiguration &conf);
 
-
     void halt() override;
 
-    BT::NodeStatus tick() override;
+    // Se cambia on_tick() en lugar de tick() para el patrón de comportamiento
+    void on_tick() override;
+    
+    BT::NodeStatus on_success() override;
+
     static BT::PortsList providedPorts()
     {
       return BT::PortsList(
@@ -31,7 +34,7 @@ public:
 private:
     rclcpp::Node::SharedPtr node_;
     rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr image_subscription_;
-    bool image_saved_;
+    bool image_saved_;  // Indica si la imagen ha sido guardada
 
     void imageCallback(const sensor_msgs::msg::Image::SharedPtr msg);
 
@@ -40,4 +43,4 @@ private:
 
 } // namespace library_lib
 
-#endif 
+#endif

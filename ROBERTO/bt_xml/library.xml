@@ -9,6 +9,7 @@
                     <Action ID="ReadQR"/>
                 </Fallback>
                 <Action ID="NavObjective"/>
+                <Action ID="StoreObject"/>
                 <Action ID="NavOdom"/>
             </Sequence>
         </KeepRunningUntilFailure>

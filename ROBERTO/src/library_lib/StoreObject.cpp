@@ -7,40 +7,47 @@ StoreObject::StoreObject(const std::string &xml_tag_name, const BT::NodeConfigur
     config().blackboard->get("node", node_);
     RCLCPP_INFO(node_->get_logger(), "Nodo StoreObject inicializado");
 
+    // Suscripción a la imagen
     image_subscription_ = node_->create_subscription<sensor_msgs::msg::Image>(
         "/rgbd_camera/image", 10,
         std::bind(&StoreObject::imageCallback, this, std::placeholders::_1)
     );
 }
 
-
 void StoreObject::halt() {
     RCLCPP_INFO(node_->get_logger(), "StoreObject halted");
 }
 
-BT::NodeStatus StoreObject::tick() {
+void StoreObject::on_tick() {
     RCLCPP_INFO(node_->get_logger(), "StoreObject ejecutándose...");
 
-
-
+    // Si aún no se ha guardado la imagen, el nodo sigue ejecutándose
     if (!image_saved_) {
-        RCLCPP_INFO(node_->get_logger(), "Destino alcanzado. Preparando captura de imagen...");
-        return BT::NodeStatus::RUNNING;
+        RCLCPP_INFO(node_->get_logger(), "Esperando a capturar imagen...");
     }
+}
 
-    return image_saved_ ? BT::NodeStatus::SUCCESS : BT::NodeStatus::FAILURE;
+BT::NodeStatus StoreObject::on_success() {
+    // Si la imagen ha sido guardada correctamente, el nodo finaliza con éxito
+    if (image_saved_) {
+        return BT::NodeStatus::SUCCESS;
+    } else {
+        return BT::NodeStatus::FAILURE;
+    }
 }
 
 void StoreObject::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg) {
     if (!image_saved_) {
         try {
+            // Convertir la imagen de ROS a OpenCV
             cv_bridge::CvImagePtr cv_ptr = cv_bridge::toCvCopy(msg, "bgr8");
 
+            // Nombre del archivo con timestamp
             std::string filename = "/home/hugo1234/Pictures/" + getTimestamp() + ".jpg";
             cv::imwrite(filename, cv_ptr->image);
 
             RCLCPP_INFO(node_->get_logger(), "Imagen guardada en: %s", filename.c_str());
-            image_saved_ = true;
+            image_saved_ = true;  // Marca la imagen como guardada
         } catch (cv_bridge::Exception &e) {
             RCLCPP_ERROR(node_->get_logger(), "Error al procesar la imagen: %s", e.what());
         }
