@@ -1,6 +1,6 @@
 # guide_kobuki
 
-© 2025 Hugo Gordo Gil
+© 2025 Hugo Gordo Gil,Mateo Ferreira Gonzalez y Roberto Donate Lario
 Algunos derechos reservados. Este trabajo se entrega bajo la licencia [CC BY-SA 4.0].
 
 En este README se analiza el proyecto desarrollado como práctica final para la asignatura de **Arquitectura de Software para Robots**. Incluye videos que muestran el robot en funcionamiento, un análisis detallado del código que compone el proyecto, los comandos necesarios para ejecutar todos los programas, y una sección dedicada a los recursos utilizados
