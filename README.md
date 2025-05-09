@@ -1,6 +1,5 @@
 # guide_kobuki
 
-# guide_kobuki
 © 2025 Hugo Gordo Gil
 Algunos derechos reservados. Este trabajo se entrega bajo la licencia [CC BY-SA 4.0].
 
