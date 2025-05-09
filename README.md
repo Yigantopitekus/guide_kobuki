@@ -106,6 +106,7 @@ Ahora vamos a analizar la estructura y el conjunto de nodos usados para el funci
 │       ├── ReadQR.hpp
 │       ├── Search.hpp
 │       └── StoreObject.hpp
+|        |__ ReadFaces.hpp
 ├── launch
 │   └── guide_kobuki.launch.py
 ├── package.xml
@@ -118,6 +119,7 @@ Ahora vamos a analizar la estructura y el conjunto de nodos usados para el funci
         ├── ReadQR.cpp
         ├── Search.cpp
         └── StoreObject.cpp
+        |__ ReadFaces.cpp
 ```
 #### **2.- Behaviour tree**
 El Behaviour Tree del proyecto toma decisiones siguiendo una estructura jerárquica de nodos que ejecutan acciones o evaluaciones lógicas. A continuación, se explica brevemente el funcionamiento:  
@@ -309,6 +311,54 @@ void StoreObject::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg) {
     }
 }
 ```
+#### **Nodo `ReadFace` - Reconocimiento de rostros y saludo personalizado**
+
+Este nodo procesa un flujo de datos de identificación de rostros, interpreta el ID asociado al rostro detectado y genera un mensaje de bienvenida personalizado en la consola para cada persona reconocida.
+
+**Esto es lo más importante de este código:**  
+```c++
+void
+ReadFace::object_callback(std_msgs::msg::Float32MultiArray::SharedPtr msg)
+{
+  if(msg != nullptr && !msg->data.empty())
+  {
+    last_object_ = *msg;
+    id_ = msg->data[0];
+  }
+}
+void library_lib::ReadFace::halt()
+{
+
+}
+BT::NodeStatus
+ReadFace::tick()
+{
+
+  if(last_object_.data.empty())
+  {  
+    return BT::NodeStatus::RUNNING;
+  }
+  switch(id_)
+  {
+    case id_Roberto_:
+    std::cout << "Bienvenido Roberto" << std::endl;
+      return BT::NodeStatus::SUCCESS;
+    case id_Hugo_:
+    std::cout << "Bienvenido Hugo" << std::endl;
+
+        return BT::NodeStatus::SUCCESS;  
+    case id_Mateo_:
+    std::cout << "Bienvenido Mateo" << std::endl;
+
+        return BT::NodeStatus::SUCCESS;
+    
+  }
+  return BT::NodeStatus::RUNNING;
+
+}
+```
+
+
 ---
 
 ### **INTEGRACIÓN DE UN NODO USANDO UN PAQUETE NUEVO**
