@@ -76,8 +76,13 @@ ros2 launch find_object_2d find_object_2d.launch.py image_topic:=/rgb/image_raw 
 
 #### Video de demostración del moviento de ida y vuelta del robot haciendo uso de los botones:
 
+[![Demostración en Video](https://img.youtube.com/vi/2WWr73CPYi4/0.jpg)](https://youtube.com/shorts/2WWr73CPYi4)
+
 
 #### Video de demostración del moviento de ida y vuelta del robot haciendo usando los qr:
+
+[![Demostración en Video](https://img.youtube.com/vi/2WWr73CPYi4/0.jpg)](https://youtube.com/shorts/2WWr73CPYi4?feature=share)
+
 
 ---
 ### **ANALISIS DEL CODIGO**
