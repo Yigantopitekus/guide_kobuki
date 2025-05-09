@@ -310,11 +310,12 @@ Para realizar la integración de los qr en el proyecto hemos hecho uso del paque
 
 En el siguiente video podremos ver como después de registrar el qr anteriormente el objeto queda guardado y cuando se le vuelve a acercar la aplicación detecta el objeto ya registrado, a la derecha podemos ver como esta publica la información en un topic por lo que podemos comprobar que si lo esta detectando:
 
-*[VIDEO DETECCION QR](https://github.com/Yigantopitekus/guide_kobuki/blob/main/ROBERTO/Videos/Demostracion_Caras.mp4)*
+[![Demostración en Video](https://img.youtube.com/vi/tmRre-DyL5w/0.jpg)](https://youtu.be/tmRre-DyL5w)
 
  En este otro video podemos ver como también podemos usar esto para reconocer incluso caras:
 
- *[VIDEO RECONOCIMIENTO FACIAL](https://github.com/Yigantopitekus/guide_kobuki/blob/main/ROBERTO/Videos/Demostracion_Caras.mp4)*
+[![Demostración en Video](https://img.youtube.com/vi/17mi5V6N8Ek/0.jpg)](https://youtu.be/17mi5V6N8Ek)
+
 
 
 #### **Integracion**
