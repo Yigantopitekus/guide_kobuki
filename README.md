@@ -287,7 +287,9 @@ Search::tick()
 
 ```
 
-##### **Nodo `StoreObject` - Captura y almacenamiento de imágenes**
+##### **Nodo `StoreObject` - Captura y almacenamiento de imágenes** 
+
+`StoreOBject no se usa finalmente en esta practica porque no hemos llegado a implementarlo, pero por separado el nodo es completamente funcional`
 
 Este nodo suscribe al robot a un flujo de imágenes, captura una cuando está disponible y la guarda en el sistema de archivos con un nombre de archivo basado en un timestamp. El nodo asegura que solo se guarda una imagen y cambia su estado a **éxito** cuando la imagen ha sido almacenada correctamente.
 
