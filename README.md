@@ -304,7 +304,9 @@ Para realizar la integración de los qr en el proyecto hemos hecho uso del paque
 
 ##### **Registro de objetos**
 
-// FALTA EL VIDEO DE MATEO
+En este video mostramos como registramos un qr:
+
+[![Demostración en Video](https://img.youtube.com/vi/JCyi_G20dUE/0.jpg)](https://youtu.be/JCyi_G20dUE)
 
 ##### **Puesta en Funcionamiento y muestras de uso**
 
